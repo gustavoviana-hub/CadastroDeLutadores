@@ -1,4 +1,4 @@
-package br.com.Lutas.CadastroDeLutadores;
+package br.com.Lutas.CadastroDeLutadores.lutadores;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
