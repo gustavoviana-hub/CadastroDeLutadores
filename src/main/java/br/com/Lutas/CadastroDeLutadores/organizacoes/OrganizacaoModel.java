@@ -2,11 +2,17 @@ package br.com.Lutas.CadastroDeLutadores.organizacoes;
 
 import br.com.Lutas.CadastroDeLutadores.lutadores.LutadorModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_organizacoes")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class OrganizacaoModel {
 
     @Id
