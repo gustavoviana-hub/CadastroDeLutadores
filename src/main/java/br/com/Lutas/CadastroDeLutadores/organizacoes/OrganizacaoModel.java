@@ -21,6 +21,8 @@ public class OrganizacaoModel {
 
     private String nomeDaOrganizacao;
 
+    private String categoria;
+
     @OneToMany(mappedBy = "organizacoes") // @OneToMany uma organização pode ter vários lutadores. @ManyToOne mais um lutador pode ter uma organização
     private List<LutadorModel> lutadores;
 

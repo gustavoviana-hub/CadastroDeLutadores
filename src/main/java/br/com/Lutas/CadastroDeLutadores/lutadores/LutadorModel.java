@@ -21,8 +21,6 @@ public class LutadorModel {
     @Column(unique = true)
     private String email;
 
-    private String categoria;
-
     private String nacionalidade;
 
     private String estiloDeLuta;
