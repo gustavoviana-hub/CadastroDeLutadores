@@ -25,14 +25,26 @@ public class PersonagemModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "habilidade")
     private String habilidade;
+
+    @Column(name = "raça")
     private String raca;
+
+    @Column(name = "tecnica")
     private String tecnica;
 
     @Column(unique = true)
     private String email;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     // Um personagem tem uma unica missão
     @ManyToOne
