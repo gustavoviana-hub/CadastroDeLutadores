@@ -2,9 +2,25 @@ package CadastroDeLutadores.personagens.model;
 
 import CadastroDeLutadores.missoes.model.MissoesModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+// @Data cria todos os getter e setter
+@Data
+
+// @Entity transforma a classe em uma entidade
 @Entity
+
+//@Table da nome a nossa entidade que é a nossa classe no banco de dados
 @Table(name = "tb_cadastro")
+
+//@AllArgsConstructor cria construtores prenchido automaticamnete, e não precisa de recarga
+@AllArgsConstructor
+
+//@NoArgsConstructor cria o construtor vazio
+@NoArgsConstructor
+
 public class PersonagemModel {
 
     @Id
@@ -20,47 +36,5 @@ public class PersonagemModel {
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
 
-    public PersonagemModel(String nome, String habilidade, String raca, String tecnica){
-        this.nome = nome;
-        this.habilidade = habilidade;
-        this.raca = raca;
-        this.tecnica = tecnica;
-    }
-
-    public PersonagemModel(){
-
-    }
-
-    public void setNome(String nome){
-        this.nome = nome;
-    }
-
-    public String getNome(){
-        return nome;
-    }
-
-    public String getHabilidade() {
-        return habilidade;
-    }
-
-    public void setHabilidade(String habilidade) {
-        this.habilidade = habilidade;
-    }
-
-    public String getRaca() {
-        return raca;
-    }
-
-    public void setRaca(String raca) {
-        this.raca = raca;
-    }
-
-    public String getTecnica() {
-        return tecnica;
-    }
-
-    public void setTecnica(String tecnica) {
-        this.tecnica = tecnica;
-    }
 
 }
