@@ -1,5 +1,6 @@
-package br.com.gvpedro.CadastroDeLutadores;
+package CadastroDeLutadores.personagens.model;
 
+import CadastroDeLutadores.missoes.model.MissoesModel;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,11 @@ public class PersonagemModel {
     private String habilidade;
     private String raca;
     private String tecnica;
+
+    // Um personagem tem uma unica missão
+    @ManyToOne
+    @JoinColumn(name = "missoes_id")
+    private MissoesModel missoes;
 
     public PersonagemModel(String nome, String habilidade, String raca, String tecnica){
         this.nome = nome;
