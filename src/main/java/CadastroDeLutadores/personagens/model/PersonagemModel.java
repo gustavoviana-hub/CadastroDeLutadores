@@ -6,19 +6,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// @Data cria todos os getter e setter
+// @Data -> cria todos os getter e setter
 @Data
 
-// @Entity transforma a classe em uma entidade
+// @Entity -> transforma a classe em uma entidade
 @Entity
 
-//@Table da nome a nossa entidade que é a nossa classe no banco de dados
+//@Table -> conseguimos colocar o nome a nossa entidade que é a nossa classe no banco de dados
 @Table(name = "tb_cadastro")
 
-//@AllArgsConstructor cria construtores prenchido automaticamnete, e não precisa de recarga
+//@AllArgsConstructor -> cria construtores prenchido automaticamnete, e não precisa de recarga
 @AllArgsConstructor
 
-//@NoArgsConstructor cria o construtor vazio
+//@NoArgsConstructor -> cria o construtor vazio
 @NoArgsConstructor
 
 public class PersonagemModel {
@@ -30,6 +30,9 @@ public class PersonagemModel {
     private String habilidade;
     private String raca;
     private String tecnica;
+
+    @Column(unique = true)
+    private String email;
 
     // Um personagem tem uma unica missão
     @ManyToOne
