@@ -1,4 +1,4 @@
-package CadastroDeLutadores.personagens.controller;
+package CadastroDePersonagens.personagens.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

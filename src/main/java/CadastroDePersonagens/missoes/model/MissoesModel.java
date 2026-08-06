@@ -1,6 +1,6 @@
-package CadastroDeLutadores.missoes.model;
+package CadastroDePersonagens.missoes.model;
 
-import CadastroDeLutadores.personagens.model.PersonagemModel;
+import CadastroDePersonagens.personagens.model.PersonagemModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

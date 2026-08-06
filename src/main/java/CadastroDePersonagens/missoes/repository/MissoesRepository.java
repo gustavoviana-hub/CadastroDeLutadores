@@ -1,6 +1,6 @@
-package CadastroDeLutadores.missoes.repository;
+package CadastroDePersonagens.missoes.repository;
 
-import CadastroDeLutadores.missoes.model.MissoesModel;
+import CadastroDePersonagens.missoes.model.MissoesModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MissoesRepository extends JpaRepository<MissoesModel, Long> {
