@@ -31,20 +31,15 @@ public class PersonagemModel {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "habilidade")
-    private String habilidade;
-
-    @Column(name = "raça")
-    private String raca;
-
-    @Column(name = "tecnica")
-    private String tecnica;
-
     @Column(unique = true)
     private String email;
 
     @Column(name = "img_url")
     private String imgUrl;
+
+    @Column(name = "rank")
+    private char rank;
+
 
     // Um personagem tem uma unica missão
     @ManyToOne

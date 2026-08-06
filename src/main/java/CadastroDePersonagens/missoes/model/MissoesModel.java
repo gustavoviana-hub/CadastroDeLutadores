@@ -16,11 +16,17 @@ public class MissoesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "objetivo")
     private String objetivo;
+
+    @Column(name = "status")
     private String status;
-    private char rank;
 
     // Uma missão tem varios personagens
     @OneToMany(mappedBy = "missoes")
