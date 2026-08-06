@@ -18,13 +18,13 @@ public class PersonagemController {
     }
 
     // Mostrar personagem por Id (Create)
-    @GetMapping("/todos")
+    @GetMapping("/listar")
     public String mostrarTodosOsPersonagens(){
         return "Mostrar Personagens";
     }
 
     // Mostrar todos os personagens (Read)
-    @GetMapping("/todosID")
+    @GetMapping("/listarID")
     public String mostrarTodosPersonagensPorId(){
         return "Mostrar Personagens por ID";
     }
