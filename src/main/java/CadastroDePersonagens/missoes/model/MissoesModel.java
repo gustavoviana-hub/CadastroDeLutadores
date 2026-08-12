@@ -1,6 +1,7 @@
 package CadastroDePersonagens.missoes.model;
 
 import CadastroDePersonagens.personagens.model.PersonagemModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,5 +31,6 @@ public class MissoesModel {
 
     // Uma missão tem varios personagens
     @OneToMany(mappedBy = "missoes")
+    @JsonIgnore
     private List<PersonagemModel> personagens;
 }
