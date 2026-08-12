@@ -5,6 +5,7 @@ import CadastroDePersonagens.personagens.repository.PersonagemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonagemService {
@@ -18,6 +19,12 @@ public class PersonagemService {
     // Listar todos os meus Personagens
     public List<PersonagemModel> listarPesronagens(){
         return personagemRepository.findAll();
+    }
+
+    //Listar todos personagens por ID
+    public PersonagemModel listarPersonagemPorId(Long id){
+        Optional<PersonagemModel> persoangemPorId = personagemRepository.findById(id);
+            return persoangemPorId.orElse(null);
     }
 
 }

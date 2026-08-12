@@ -34,9 +34,9 @@ public class PersonagemController {
     }
 
     // Mostrar todos os personagens (Read)
-    @GetMapping("/listarID")
-    public String mostrarTodosPersonagensPorId(){
-        return "Mostrar Personagens por ID";
+    @GetMapping("/listar/{id}")
+    public PersonagemModel listarPersonagensPorId(@PathVariable Long id){
+        return personagemService.listarPersonagemPorId(id);
     }
 
     // Alterar dados dos personagens (Update)
