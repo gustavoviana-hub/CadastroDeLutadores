@@ -1,10 +1,20 @@
 package CadastroDePersonagens.personagens.controller;
 
+import CadastroDePersonagens.personagens.model.PersonagemModel;
+import CadastroDePersonagens.personagens.service.PersonagemService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping("/personagem")
 public class PersonagemController {
+
+    private PersonagemService personagemService;
+
+    public PersonagemController(PersonagemService personagemService) {
+        this.personagemService = personagemService;
+    }
 
     @GetMapping("/boasVindas")
     public String boasVindas(){
@@ -19,8 +29,8 @@ public class PersonagemController {
 
     // Mostrar personagem por Id (Create)
     @GetMapping("/listar")
-    public String mostrarTodosOsPersonagens(){
-        return "Mostrar Personagens";
+    public List<PersonagemModel> listarTodosOsPersonagens(){
+        return personagemService.listarPesronagens();
     }
 
     // Mostrar todos os personagens (Read)
@@ -34,7 +44,6 @@ public class PersonagemController {
     public String alterarPersonagemPorId(){
         return "Alterar Personagem por id";
     }
-
 
     // Deletar personagem (Delete)
     @DeleteMapping("/deletar")
