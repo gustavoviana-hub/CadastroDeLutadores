@@ -16,15 +16,10 @@ public class PersonagemController {
         this.personagemService = personagemService;
     }
 
-    @GetMapping("/boasVindas")
-    public String boasVindas(){
-        return "Essa é a minha primeira mensagem nessa rota";
-    }
-
     // Adicinar personagem (Create)
     @PostMapping("/criar")
-    public String criarNinja(){
-        return "Personagem Criado";
+    public PersonagemModel criarNinja(@RequestBody PersonagemModel persoangem){
+        return personagemService.criarPersoangem(persoangem);
     }
 
     // Mostrar personagem por Id (Create)

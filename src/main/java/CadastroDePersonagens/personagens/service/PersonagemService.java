@@ -27,4 +27,9 @@ public class PersonagemService {
             return persoangemPorId.orElse(null);
     }
 
+    // Criar um novo Personagem
+    public PersonagemModel criarPersoangem(PersonagemModel personagem){
+        return personagemRepository.save(personagem);
+    }
+
 }
