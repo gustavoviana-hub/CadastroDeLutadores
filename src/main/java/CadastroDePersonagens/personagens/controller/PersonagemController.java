@@ -34,10 +34,10 @@ public class PersonagemController {
         return personagemService.listarPersonagemPorId(id);
     }
 
-    // Alterar dados dos personagens (Update)
-    @PutMapping("/alterarId")
-    public String alterarPersonagemPorId(){
-        return "Alterar Personagem por id";
+    // Atualizar Personagem
+    @PutMapping("/alterar/{id}")
+    public PersonagemModel alterarPersonagemPorId(@PathVariable Long id, @RequestBody PersonagemModel personagemAtualizado){
+        return personagemService.atualizarPersonagem(id, personagemAtualizado);
     }
 
     // Deletar personagem (Delete)

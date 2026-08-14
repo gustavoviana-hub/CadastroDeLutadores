@@ -33,6 +33,14 @@ public class PersonagemService {
         return personagemRepository.save(personagem);
     }
 
+    //Atualiza Personagem
+    public PersonagemModel atualizarPersonagem(Long id, PersonagemModel personagemAtualizado){
+        if (personagemRepository.existsById(id)){
+            personagemAtualizado.setId(id);
+            return personagemRepository.save(personagemAtualizado);
+        }
+        return null;
+    }
 
     // Deletar Personagem
     public void deletarPersonagemPorId(Long id){
