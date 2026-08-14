@@ -1,5 +1,6 @@
 package CadastroDePersonagens.personagens.service;
 
+import CadastroDePersonagens.missoes.model.MissoesModel;
 import CadastroDePersonagens.personagens.model.PersonagemModel;
 import CadastroDePersonagens.personagens.repository.PersonagemRepository;
 import org.springframework.stereotype.Service;
@@ -17,19 +18,25 @@ public class PersonagemService {
     }
 
     // Listar todos os meus Personagens
-    public List<PersonagemModel> listarPesronagens(){
+    public List<PersonagemModel> listarPesronagens() {
         return personagemRepository.findAll();
     }
 
     //Listar todos personagens por ID
-    public PersonagemModel listarPersonagemPorId(Long id){
+    public PersonagemModel listarPersonagemPorId(Long id) {
         Optional<PersonagemModel> persoangemPorId = personagemRepository.findById(id);
-            return persoangemPorId.orElse(null);
+        return persoangemPorId.orElse(null);
     }
 
     // Criar um novo Personagem
-    public PersonagemModel criarPersoangem(PersonagemModel personagem){
+    public PersonagemModel criarPersoangem(PersonagemModel personagem) {
         return personagemRepository.save(personagem);
+    }
+
+
+    // Deletar Personagem
+    public void deletarPersonagemPorId(Long id){
+        personagemRepository.deleteById(id);
     }
 
 }

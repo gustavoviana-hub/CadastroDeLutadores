@@ -41,9 +41,9 @@ public class PersonagemController {
     }
 
     // Deletar personagem (Delete)
-    @DeleteMapping("/deletar")
-    public String deletarPorId(){
-        return "Personagem deletado";
+    @DeleteMapping("/deletar/{id}")
+    public void deletarPersonagemPorId(@PathVariable Long id){
+        personagemService.deletarPersonagemPorId(id);
     }
 
 
