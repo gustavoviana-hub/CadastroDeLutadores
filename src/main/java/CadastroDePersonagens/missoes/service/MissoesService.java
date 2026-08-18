@@ -1,5 +1,7 @@
 package CadastroDePersonagens.missoes.service;
 
+import CadastroDePersonagens.missoes.MissoesDTO;
+import CadastroDePersonagens.missoes.MissoesMapper;
 import CadastroDePersonagens.missoes.model.MissoesModel;
 import CadastroDePersonagens.missoes.repository.MissoesRepository;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,11 @@ import java.util.Optional;
 public class MissoesService {
 
     public MissoesRepository missoesRepository;
+    public MissoesMapper missoesMapper;
 
-    public MissoesService(MissoesRepository missoesRepository) {
+    public MissoesService(MissoesRepository missoesRepository, MissoesMapper missoesMapper) {
         this.missoesRepository = missoesRepository;
+        this.missoesMapper = missoesMapper;
     }
 
     public List<MissoesModel> listarMissoes(){
@@ -25,8 +29,10 @@ public class MissoesService {
         return missoesPorId.orElse(null);
     }
 
-    public MissoesModel criarMissao(MissoesModel missaoNova){
-        return missoesRepository.save(missaoNova);
+    public MissoesDTO criarMissao(MissoesDTO missoesDTO){
+        MissoesModel missoes = missoesMapper.map(missoesDTO);
+        missoes = missoesRepository.save(missoes);
+        return missoesMapper.map(missoes);
     }
 
     public MissoesModel alterar(MissoesModel alterarMissao, Long id) {
