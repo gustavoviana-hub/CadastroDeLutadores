@@ -1,6 +1,8 @@
 package CadastroDePersonagens.personagens.service;
 
 import CadastroDePersonagens.missoes.model.MissoesModel;
+import CadastroDePersonagens.personagens.PersonagemDTO;
+import CadastroDePersonagens.personagens.PersonagemMapper;
 import CadastroDePersonagens.personagens.model.PersonagemModel;
 import CadastroDePersonagens.personagens.repository.PersonagemRepository;
 import org.springframework.stereotype.Service;
@@ -12,9 +14,11 @@ import java.util.Optional;
 public class PersonagemService {
 
     private PersonagemRepository personagemRepository;
+    private PersonagemMapper personagemMapper;
 
-    public PersonagemService(PersonagemRepository personagemRepository) {
+    public PersonagemService(PersonagemRepository personagemRepository, PersonagemMapper personagemMapper) {
         this.personagemRepository = personagemRepository;
+        this.personagemMapper = personagemMapper;
     }
 
     // Listar todos os meus Personagens
@@ -29,8 +33,10 @@ public class PersonagemService {
     }
 
     // Criar um novo Personagem
-    public PersonagemModel criarPersoangem(PersonagemModel personagem) {
-        return personagemRepository.save(personagem);
+    public PersonagemDTO criarPersoangem(PersonagemDTO personagemDTO) {
+        PersonagemModel personagem = personagemMapper.map(personagemDTO);
+        personagem = personagemRepository.save(personagem);
+        return personagemMapper.map(personagem);
     }
 
     //Atualiza Personagem

@@ -1,5 +1,6 @@
 package CadastroDePersonagens.personagens.controller;
 
+import CadastroDePersonagens.personagens.PersonagemDTO;
 import CadastroDePersonagens.personagens.model.PersonagemModel;
 import CadastroDePersonagens.personagens.service.PersonagemService;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class PersonagemController {
 
     // Adicinar personagem (Create)
     @PostMapping("/criar")
-    public PersonagemModel criarNinja(@RequestBody PersonagemModel persoangem){
+    public PersonagemDTO criarNinja(@RequestBody PersonagemDTO persoangem){
         return personagemService.criarPersoangem(persoangem);
     }
 
