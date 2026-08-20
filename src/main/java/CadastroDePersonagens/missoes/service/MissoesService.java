@@ -1,23 +1,33 @@
 package CadastroDePersonagens.missoes.service;
 
+import CadastroDePersonagens.missoes.MissoesDTO;
+import CadastroDePersonagens.missoes.MissoesMapper;
 import CadastroDePersonagens.missoes.model.MissoesModel;
 import CadastroDePersonagens.missoes.repository.MissoesRepository;
+import CadastroDePersonagens.personagens.PersonagemDTO;
+import CadastroDePersonagens.personagens.model.PersonagemModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MissoesService {
 
     public MissoesRepository missoesRepository;
+    public MissoesMapper missoesMapper;
 
-    public MissoesService(MissoesRepository missoesRepository) {
+    public MissoesService(MissoesRepository missoesRepository, MissoesMapper missoesMapper) {
         this.missoesRepository = missoesRepository;
+        this.missoesMapper = missoesMapper;
     }
 
-    public List<MissoesModel> listarMissoes(){
-        return missoesRepository.findAll();
+    public List<MissoesDTO> listarMissoes() {
+        List<MissoesModel> missoes = missoesRepository.findAll();
+        return missoes.stream()
+                .map(missoesMapper::map)
+                .collect(Collectors.toList());
     }
 
     public MissoesModel listarMissoesPorId(Long id) {
@@ -25,8 +35,10 @@ public class MissoesService {
         return missoesPorId.orElse(null);
     }
 
-    public MissoesModel criarMissao(MissoesModel missaoNova){
-        return missoesRepository.save(missaoNova);
+    public MissoesDTO criarMissao(MissoesDTO missoesDTO){
+        MissoesModel missoes = missoesMapper.map(missoesDTO);
+        missoes = missoesRepository.save(missoes);
+        return missoesMapper.map(missoes);
     }
 
     public MissoesModel alterar(MissoesModel alterarMissao, Long id) {

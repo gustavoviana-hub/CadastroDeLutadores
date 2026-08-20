@@ -1,5 +1,6 @@
 package CadastroDePersonagens.missoes.controller;
 
+import CadastroDePersonagens.missoes.MissoesDTO;
 import CadastroDePersonagens.missoes.model.MissoesModel;
 import CadastroDePersonagens.missoes.service.MissoesService;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class MissoesController {
 
     // Listar Missoes
     @GetMapping("/listar")
-    public List<MissoesModel> listarMissoes(){
+    public List<MissoesDTO> listarMissoes() {
         return missoesService.listarMissoes();
     }
 
@@ -30,7 +31,7 @@ public class MissoesController {
 
     // Criar Missao
     @PostMapping("/criar")
-    public MissoesModel criarMissao(@RequestBody MissoesModel missaoNova){
+    public MissoesDTO criarMissao(@RequestBody MissoesDTO missaoNova) {
         return missoesService.criarMissao(missaoNova);
     }
 
@@ -45,5 +46,7 @@ public class MissoesController {
     public void deletarMissoesPorId(@PathVariable Long id){
         missoesService.deletarMissaoPorId(id);
     }
+
+
 
 }

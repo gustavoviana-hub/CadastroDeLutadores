@@ -1,43 +1,56 @@
 package CadastroDePersonagens.personagens.service;
 
 import CadastroDePersonagens.missoes.model.MissoesModel;
+import CadastroDePersonagens.personagens.PersonagemDTO;
+import CadastroDePersonagens.personagens.PersonagemMapper;
 import CadastroDePersonagens.personagens.model.PersonagemModel;
 import CadastroDePersonagens.personagens.repository.PersonagemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonagemService {
 
     private PersonagemRepository personagemRepository;
+    private PersonagemMapper personagemMapper;
 
-    public PersonagemService(PersonagemRepository personagemRepository) {
+    public PersonagemService(PersonagemRepository personagemRepository, PersonagemMapper personagemMapper) {
         this.personagemRepository = personagemRepository;
+        this.personagemMapper = personagemMapper;
     }
 
     // Listar todos os meus Personagens
-    public List<PersonagemModel> listarPesronagens() {
-        return personagemRepository.findAll();
+    public List<PersonagemDTO> listarPesronagens() {
+        List<PersonagemModel> personagem = personagemRepository.findAll();
+        return personagem.stream()
+                .map(personagemMapper::map)
+                .collect(Collectors.toList());
     }
 
     //Listar todos personagens por ID
-    public PersonagemModel listarPersonagemPorId(Long id) {
-        Optional<PersonagemModel> persoangemPorId = personagemRepository.findById(id);
-        return persoangemPorId.orElse(null);
+    public PersonagemDTO listarPersonagemPorId(Long id) {
+        Optional<PersonagemModel> personagemPorId = personagemRepository.findById(id);
+        return personagemPorId.map(personagemMapper::map).orElse(null);
     }
 
     // Criar um novo Personagem
-    public PersonagemModel criarPersoangem(PersonagemModel personagem) {
-        return personagemRepository.save(personagem);
+    public PersonagemDTO criarPersoangem(PersonagemDTO personagemDTO) {
+        PersonagemModel personagem = personagemMapper.map(personagemDTO);
+        personagem = personagemRepository.save(personagem);
+        return personagemMapper.map(personagem);
     }
 
     //Atualiza Personagem
-    public PersonagemModel atualizarPersonagem(Long id, PersonagemModel personagemAtualizado){
-        if (personagemRepository.existsById(id)){
+    public PersonagemDTO atualizarPersonagem(Long id, PersonagemDTO personagemDTO) {
+        Optional<PersonagemModel> personagemExistente = personagemRepository.findById(id);
+        if (personagemExistente.isPresent()) {
+            PersonagemModel personagemAtualizado = personagemMapper.map(personagemDTO);
             personagemAtualizado.setId(id);
-            return personagemRepository.save(personagemAtualizado);
+            PersonagemModel personagemSalvo = personagemRepository.save(personagemAtualizado);
+            return personagemMapper.map(personagemSalvo);
         }
         return null;
     }
