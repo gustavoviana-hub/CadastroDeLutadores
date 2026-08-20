@@ -4,10 +4,13 @@ import CadastroDePersonagens.missoes.MissoesDTO;
 import CadastroDePersonagens.missoes.MissoesMapper;
 import CadastroDePersonagens.missoes.model.MissoesModel;
 import CadastroDePersonagens.missoes.repository.MissoesRepository;
+import CadastroDePersonagens.personagens.PersonagemDTO;
+import CadastroDePersonagens.personagens.model.PersonagemModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MissoesService {
@@ -20,8 +23,11 @@ public class MissoesService {
         this.missoesMapper = missoesMapper;
     }
 
-    public List<MissoesModel> listarMissoes(){
-        return missoesRepository.findAll();
+    public List<MissoesDTO> listarMissoes() {
+        List<MissoesModel> missoes = missoesRepository.findAll();
+        return missoes.stream()
+                .map(missoesMapper::map)
+                .collect(Collectors.toList());
     }
 
     public MissoesModel listarMissoesPorId(Long id) {

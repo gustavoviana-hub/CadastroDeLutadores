@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonagemService {
@@ -22,14 +23,17 @@ public class PersonagemService {
     }
 
     // Listar todos os meus Personagens
-    public List<PersonagemModel> listarPesronagens() {
-        return personagemRepository.findAll();
+    public List<PersonagemDTO> listarPesronagens() {
+        List<PersonagemModel> personagem = personagemRepository.findAll();
+        return personagem.stream()
+                .map(personagemMapper::map)
+                .collect(Collectors.toList());
     }
 
     //Listar todos personagens por ID
-    public PersonagemModel listarPersonagemPorId(Long id) {
-        Optional<PersonagemModel> persoangemPorId = personagemRepository.findById(id);
-        return persoangemPorId.orElse(null);
+    public PersonagemDTO listarPersonagemPorId(Long id) {
+        Optional<PersonagemModel> personagemPorId = personagemRepository.findById(id);
+        return personagemPorId.map(personagemMapper::map).orElse(null);
     }
 
     // Criar um novo Personagem
@@ -40,10 +44,13 @@ public class PersonagemService {
     }
 
     //Atualiza Personagem
-    public PersonagemModel atualizarPersonagem(Long id, PersonagemModel personagemAtualizado){
-        if (personagemRepository.existsById(id)){
+    public PersonagemDTO atualizarPersonagem(Long id, PersonagemDTO personagemDTO) {
+        Optional<PersonagemModel> personagemExistente = personagemRepository.findById(id);
+        if (personagemExistente.isPresent()) {
+            PersonagemModel personagemAtualizado = personagemMapper.map(personagemDTO);
             personagemAtualizado.setId(id);
-            return personagemRepository.save(personagemAtualizado);
+            PersonagemModel personagemSalvo = personagemRepository.save(personagemAtualizado);
+            return personagemMapper.map(personagemSalvo);
         }
         return null;
     }

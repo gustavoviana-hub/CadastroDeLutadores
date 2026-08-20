@@ -24,20 +24,20 @@ public class PersonagemController {
     }
 
     // Mostrar personagem por Id (Create)
-    @GetMapping("/listar")
-    public List<PersonagemModel> listarTodosOsPersonagens(){
-        return personagemService.listarPesronagens();
+    @GetMapping("/listar/{id}")
+    public PersonagemDTO listarTodosOsPersonagens(@PathVariable Long id){
+        return personagemService.listarPersonagemPorId(id);
     }
 
     // Mostrar todos os personagens (Read)
-    @GetMapping("/listar/{id}")
-    public PersonagemModel listarPersonagensPorId(@PathVariable Long id){
-        return personagemService.listarPersonagemPorId(id);
+    @GetMapping("/listar")
+    public List<PersonagemDTO> listarPersonagensPorId(){
+        return personagemService.listarPesronagens();
     }
 
     // Atualizar Personagem
     @PutMapping("/alterar/{id}")
-    public PersonagemModel alterarPersonagemPorId(@PathVariable Long id, @RequestBody PersonagemModel personagemAtualizado){
+    public PersonagemDTO alterarPersonagemPorId(@PathVariable Long id, @RequestBody PersonagemDTO personagemAtualizado){
         return personagemService.atualizarPersonagem(id, personagemAtualizado);
     }
 
